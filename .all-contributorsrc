@@ -144,7 +144,8 @@
       "profile": "https://github.com/prasoon-sinha",
       "contributions": [
         "ideas",
-        "talk"
+        "talk",
+        "mentoring"
       ]
     },
     {
@@ -829,7 +830,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/153504816?v=4",
       "profile": "https://github.com/VenkateswaraVatam",
       "contributions": [
-        "projectManagement"
+        "projectManagement",
+        "talk"
       ]
     },
     {
@@ -897,6 +899,118 @@
         "test",
         "bug",
         "code"
+      ]
+    },
+    {
+      "login": "RvishankarOMnia",
+      "name": "RvishankarOMnia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186007052?v=4",
+      "profile": "https://github.com/RvishankarOMnia",
+      "contributions": [
+        "ideas",
+        "talk",
+        "mentoring"
+      ]
+    },
+    {
+      "login": "jagadeeshnv",
+      "name": "Jagadeesh N V",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39791839?v=4",
+      "profile": "https://github.com/jagadeeshnv",
+      "contributions": [
+         "code"
+      ]
+    },
+    {
+      "login": "sourabh-sahu1",
+      "name": "sourabh-sahu1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196315600?v=4",
+      "profile": "https://github.com/sourabh-sahu1",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ghandoura",
+      "name": "Adam Ghandoura",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87424850?v=4",
+      "profile": "https://github.com/ghandoura",
+      "contributions": [
+        "test",
+        "code"
+      ]
+    },
+    {
+      "login": "Coleman-Trader",
+      "name": "Coleman-Trader",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196217244?v=4",
+      "profile": "https://github.com/Coleman-Trader",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "youngjae-hur7",
+      "name": "youngjae-hur7",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196205015?v=4",
+      "profile": "https://github.com/youngjae-hur7",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Grace-Chang2",
+      "name": "Grace-Chang2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196347461?v=4",
+      "profile": "https://github.com/Grace-Chang2",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Cypher-Miller",
+      "name": "Cypher-Miller",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123703182?v=4",
+      "profile": "https://github.com/Cypher-Miller",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "vvittal100",
+      "name": "vvittal100",
+      "avatar_url": "https://avatars.githubusercontent.com/u/202238575?v=4",
+      "profile": "https://github.com/vvittal100",
+      "contributions": [
+        "projectManagement",
+        "talk"
+      ]
+    },
+    {
+      "login": "kksenthilkumar",
+      "name": "kksenthilkumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/202253529?v=4",
+      "profile": "https://github.com/kksenthilkumar",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
+      "login": "pullan1",
+      "name": "pullan1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/173048662?v=4",
+      "profile": "https://github.com/pullan1",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "harshal2799",
+      "name": "harshal2799",
+      "avatar_url": "https://avatars.githubusercontent.com/u/202241497?v=4",
+      "profile": "https://github.com/harshal2799",
+      "contributions": [
+        "test"
       ]
     }
   ],
