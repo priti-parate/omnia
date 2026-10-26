@@ -18,17 +18,30 @@ Tests the _is_same_origin method to ensure it properly validates URLs
 and prevents Server-Side Request Forgery (SSRF) attacks.
 """
 
-import pytest
+# Tests deliberately exercise the private SSRF-guard method, and the
+# urljoin fixture tests accept the shared `client` fixture purely for
+# consistency even when the test body does not reference it.
+# pylint: disable=protected-access,unused-argument
 
-# Import the OMEClient class from the module
+import importlib.util
 import sys
+import urllib.parse
 from pathlib import Path
 
-# Add the src directory to the path
-src_path = Path(__file__).parent.parent.parent.parent / "src" / "discovery" / "plugins" / "modules"
-sys.path.insert(0, str(src_path))
+import pytest
 
-from ome_server_inventory import OMEClient
+# Load the OMEClient class directly from its source file so the import
+# does not depend on the discovery collection being installed, and so
+# the module import does not need to appear before the sys.path setup.
+_MODULE_PATH = (
+    Path(__file__).parent.parent.parent.parent
+    / "src" / "discovery" / "plugins" / "modules" / "ome_server_inventory.py"
+)
+_SPEC = importlib.util.spec_from_file_location("ome_server_inventory", _MODULE_PATH)
+_MODULE = importlib.util.module_from_spec(_SPEC)
+sys.modules["ome_server_inventory"] = _MODULE
+_SPEC.loader.exec_module(_MODULE)
+OMEClient = _MODULE.OMEClient
 
 
 class TestSSRFProtection:
@@ -52,12 +65,16 @@ class TestSSRFProtection:
 
     def test_absolute_same_host_link_accepted(self, client):
         """Test that absolute links to same host are accepted."""
-        assert client._is_same_origin("https://192.168.1.100/api/GroupService/Groups(1)/Devices") is True
+        assert client._is_same_origin(
+            "https://192.168.1.100/api/GroupService/Groups(1)/Devices"
+        ) is True
         assert client._is_same_origin("https://192.168.1.100/api/DeviceService/Devices") is True
 
     def test_absolute_same_host_with_port_accepted(self, client):
         """Test that absolute links to same host with explicit port are accepted."""
-        assert client._is_same_origin("https://192.168.1.100:443/api/GroupService/Groups(1)/Devices") is True
+        assert client._is_same_origin(
+            "https://192.168.1.100:443/api/GroupService/Groups(1)/Devices"
+        ) is True
 
     def test_absolute_foreign_host_rejected(self, client):
         """Test that absolute links to foreign hosts are rejected."""
@@ -74,7 +91,9 @@ class TestSSRFProtection:
         """Test that metadata service URLs are blocked."""
         assert client._is_same_origin("http://169.254.169.254/latest/meta-data/") is False
         assert client._is_same_origin("https://169.254.169.254/latest/meta-data/") is False
-        assert client._is_same_origin("https://metadata.google.internal/computeMetadata/v1/") is False
+        assert client._is_same_origin(
+            "https://metadata.google.internal/computeMetadata/v1/"
+        ) is False
 
     def test_http_scheme_rejected(self, client):
         """Test that HTTP (non-HTTPS) scheme is rejected."""
@@ -97,7 +116,6 @@ class TestSSRFProtection:
 
     def test_urljoin_with_relative_path(self, client):
         """Test that urllib.parse.urljoin works correctly with relative paths."""
-        import urllib.parse
         base_url = "https://192.168.1.100"
         relative = "/api/GroupService/Groups(1)/Devices"
         resolved = urllib.parse.urljoin(base_url, relative)
@@ -105,7 +123,6 @@ class TestSSRFProtection:
 
     def test_urljoin_with_absolute_same_host(self, client):
         """Test that urllib.parse.urljoin works with absolute same-host URLs."""
-        import urllib.parse
         base_url = "https://192.168.1.100"
         absolute = "https://192.168.1.100/api/GroupService/Groups(1)/Devices"
         resolved = urllib.parse.urljoin(base_url, absolute)
@@ -113,7 +130,6 @@ class TestSSRFProtection:
 
     def test_urljoin_with_absolute_foreign_host(self, client):
         """Test that urllib.parse.urljoin preserves foreign host URLs."""
-        import urllib.parse
         base_url = "https://192.168.1.100"
         foreign = "https://attacker.com/steal"
         resolved = urllib.parse.urljoin(base_url, foreign)
